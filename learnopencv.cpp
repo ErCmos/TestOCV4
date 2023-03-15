@@ -68,7 +68,7 @@ void LearnOpenCV::haarCascade ()
 
       VideoCapture source;
       source.open(0);
-      Mat frame;
+      Mat frame,dst;
 
       double tt_opencvHaar = 0;
       double fpsOpencvHaar = 0;
@@ -78,13 +78,15 @@ void LearnOpenCV::haarCascade ()
           if(frame.empty())
               break;
           // Show Processed Image with detected faces
-          imshow( "Image Detection", frame );
+          cv::resize(frame,dst, Size(), .5, .5, INTER_LINEAR);
+          imshow( "Image Detection", dst );
           double t = cv::getTickCount();
-          detectFaceOpenCVHaar ( faceCascade, frame );
+          detectFaceOpenCVHaar ( faceCascade, dst );
           tt_opencvHaar = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
           fpsOpencvHaar = 1/tt_opencvHaar;
-          putText(frame, format("OpenCV HAAR ; FPS = %.2f",fpsOpencvHaar), Point(10, 50), FONT_HERSHEY_SIMPLEX, 1.4, Scalar(0, 0, 255), 4);
-          imshow( "OpenCV - HAAR Face Detection", frame );
+          putText(dst, format("OpenCV HAAR ; FPS = %.2f",fpsOpencvHaar), Point(10, 50), FONT_HERSHEY_SIMPLEX, 1.4, Scalar(0, 0, 255), 4);
+          //cv::resize(frame,dst, Size(), .5, .5, INTER_LINEAR);
+          imshow( "OpenCV - HAAR Face Detection", dst );
           int c = waitKey(5);
           if(c == 27 || c == 'q' || c == 'Q')
           {
@@ -136,7 +138,7 @@ void LearnOpenCV::DNN()
 
   VideoCapture source;
   source.open(0);
-  Mat frame;
+  Mat frame,dst;
 
   double tt_opencvDNN = 0;
   double fpsOpencvDNN = 0;
@@ -146,13 +148,15 @@ void LearnOpenCV::DNN()
       if(frame.empty())
           break;
       // Show Processed Image with detected faces
-      imshow( "Image Detection", frame );
+      cv::resize(frame,dst, Size(), .5, .5, INTER_LINEAR);
+      imshow( "Image Detection", dst );
       double t = cv::getTickCount();
       detectFaceOpenCVDNN ( net, frame );
       tt_opencvDNN = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
       fpsOpencvDNN = 1/tt_opencvDNN;
       putText(frame, format("OpenCV DNN ; FPS = %.2f",fpsOpencvDNN), Point(10, 50), FONT_HERSHEY_SIMPLEX, 1.4, Scalar(0, 0, 255), 4);
-      imshow( "OpenCV - DNN Face Detection", frame );
+      cv::resize(frame,dst, Size(), .5, .5, INTER_LINEAR);
+      imshow( "OpenCV - DNN Face Detection", dst );
       cout << "Time Taken = " << tt_opencvDNN << endl;
       int c = waitKey(5);
       if(c == 27 || c == 'q' || c == 'Q')
@@ -295,7 +299,8 @@ int padding = 20;
 while(waitKey(1) < 0) {
   // read frame
   Mat frame;
-  cap.read(frame);
+  cap.read(framocabezudo    Empleados2022c
+           ocabezudo    \\e);
   if (frame.empty())
   {
       waitKey();
@@ -382,8 +387,8 @@ void LearnOpenCV::Test(QString Texto)
     Box.exec();
    break;
    case 2:
-    Box.setText("Lo elegido es una Cámara");
-    Box.exec();
+    //Box.setText("Lo elegido es una Cámara");
+    //Box.exec();
     source.open(0);
    break;
    default:

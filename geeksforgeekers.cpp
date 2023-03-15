@@ -75,11 +75,11 @@ void Geeksforgeekers::inicio()
 {
 // VideoCapture class for playing video for which faces to be detected
     VideoCapture capture;
-    Mat frame, image;
+    Mat frame, image, dst;
 
     // PreDefined trained XML classifiers with facial features
     CascadeClassifier cascade, nestedCascade;
-    double scale=1;
+    double scale=0.5;
 
     // Load classifiers from "opencv/data/haarcascades" directory
     //nestedCascade.load( "../../haarcascade_eye_tree_eyeglasses.xml" ) ;
@@ -100,9 +100,11 @@ void Geeksforgeekers::inicio()
             capture >> frame;
             if( frame.empty() )
                 break;
-            Mat frame1 = frame.clone();
+            //Mat frame1 = frame.clone();
             // Show Processed Image with detected faces
-            imshow( "Image Detection", frame );
+            cv::resize(frame,dst, Size(), .5, .5, INTER_LINEAR);
+            imshow( "Image Detection", dst );
+            Mat frame1 = dst.clone();
             detectAndDraw( frame1, cascade, nestedCascade, scale );
             char c = (char)waitKey(10);
 
